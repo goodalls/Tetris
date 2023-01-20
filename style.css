@@ -1,17 +1,22 @@
 body {
   font-family: "VT323", monospace;
+  align-content: center;
 }
 
 header {
-    align-content: center;
-    align-items: center;
+  text-align: center;
+}
+
+main {
+  width: 100%;
+  margin: auto;
 }
 
 h1 {
-    font-size: 3rem;
+  font-size: 4rem;
 }
 
-#canvas {
-    border: 1px;
-    border-color: black;
+canvas {
+  border: 3px solid black;
+  margin: auto;
 }
