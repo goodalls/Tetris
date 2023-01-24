@@ -23,7 +23,7 @@ function control(e) {
   }
 }
 
-//single box
+//Draw single box
 function draw(x, y, color) {
   ctx.fillStyle = color;
   ctx.fillRect(x, y, scale, scale);
@@ -100,6 +100,18 @@ function shape(x, y, type) {
       break;
   }
 }
+class Piece {
+  constructor (x, y) {
+      this.x = x;
+      this.y = y;
+      this.moving = false;
+    
+      rotate () {
+      
+      };
+      
+  }
+};
 
 
 window.addEventListener("keydown", control);
