@@ -11,7 +11,7 @@ function control(e) {
       console.log("arrowDown");
       break;
     case 38:
-      console.log("ArrowUp");
+      console.log("arrowUp");
       break;
     case 39:
       console.log("arrowRight");
