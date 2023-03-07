@@ -1,6 +1,8 @@
 let c = document.getElementById("canvas");
 let ctx = c.getContext("2d");
 let scale = 20;
+const piecesArray = [];
+let gameRunning = "false";
 
 function control(e) {
   switch (e.keyCode) {
@@ -121,8 +123,28 @@ function randomizer() {
 };
 
 function startGame() {
-console.log('start pressed');
+  const piece = new Piece(250, 0, randomizer());
+  shape(piece.x, piece.y, piece.shape)
+  piecesArray.push(piece)
+  console.log(piecesArray);
+  gameRunning = "true";
+  runGame()
 };
+
+function runGame() {
+  
+  setTimeout(() => {
+  ctx.clearRect(0,0,500,500)
+  piecesArray.forEach(e=> {
+    e.y = e.y+scale
+    shape(e.x, e.y, e.shape)
+  })
+  if(gameRunning === "true"){
+    runGame()
+  }
+}, 1000);
+}
 
 window.addEventListener("keydown", control);
 document.querySelector(".start").addEventListener("click", startGame)
+document.querySelector(".end").addEventListener("click", ()=>{gameRunning = "false"; console.log("ended"); })
