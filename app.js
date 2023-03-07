@@ -123,12 +123,14 @@ function randomizer() {
 };
 
 function startGame() {
+  if (gameRunning === "false") {
   const piece = new Piece(250, 0, randomizer());
   shape(piece.x, piece.y, piece.shape)
   piecesArray.push(piece)
   console.log(piecesArray);
   gameRunning = "true";
   runGame()
+  }
 };
 
 function runGame() {
