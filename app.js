@@ -101,17 +101,28 @@ function shape(x, y, type) {
   }
 }
 class Piece {
-  constructor (x, y) {
-      this.x = x;
-      this.y = y;
-      this.moving = false;
-    
-      rotate () {
-      
-      };
-      
+  constructor(x, y, shape) {
+    this.x = x;
+    this.y = y;
+    this.moving = false;
+    this.shape = shape
   }
+
+  rotate() {
+    console.log("rotate");
+  }
+}
+
+function randomizer() {
+  let shapes = ["i", "o", "t", "j", "l", "s", "z"];
+  let random = Math.floor(Math.random() * shapes.length);
+  let shape = shapes[random];
+  return shape;
 };
 
+function startGame() {
+console.log('start pressed');
+};
 
 window.addEventListener("keydown", control);
+document.querySelector(".start").addEventListener("click", startGame)
