@@ -1,13 +1,15 @@
 let c = document.getElementById("canvas");
 let ctx = c.getContext("2d");
-let scale = 20;
+const scale = 20;
 const piecesArray = [];
 let gameRunning = "false";
+const color = "#" + Math.floor(Math.random()*16777215).toString(16);
 
 function control(e) {
   switch (e.keyCode) {
     case 37:
       console.log("arrowLeft");
+
       break;
     case 40:
       console.log("arrowDown");
@@ -103,11 +105,12 @@ function shape(x, y, type) {
   }
 }
 class Piece {
-  constructor(x, y, shape) {
+  constructor(x, y, shape, color) {
     this.x = x;
     this.y = y;
-    this.moving = false;
-    this.shape = shape
+    this.shape = shape;
+    this.color = color;
+    this.moving = true;
   }
 
   rotate() {
@@ -124,7 +127,7 @@ function randomizer() {
 
 function startGame() {
   if (gameRunning === "false") {
-  const piece = new Piece(250, 0, randomizer());
+  const piece = new Piece(250, 0, randomizer(), color);
   shape(piece.x, piece.y, piece.shape)
   piecesArray.push(piece)
   console.log(piecesArray);
@@ -138,13 +141,34 @@ function runGame() {
   setTimeout(() => {
   ctx.clearRect(0,0,500,500)
   piecesArray.forEach(e=> {
-    e.y = e.y+scale
+   
+
+
+    //if moving move piece down board
+   if (e.moving === true) {
+     e.y = e.y+scale
+    //check for Collitions side to side and down 
+    //collitions(e)
+   }
+
     shape(e.x, e.y, e.shape)
   })
   if(gameRunning === "true"){
     runGame()
+
   }
 }, 1000);
+}
+
+function collitions(piece) {
+  //collitions side to side
+  if (piece.x < 0 || piece.x > 500) {
+    return false; 
+  } else {
+    return true;
+  }
+  // check for collitions down and with other objects if detected set movement to false
+
 }
 
 window.addEventListener("keydown", control);
