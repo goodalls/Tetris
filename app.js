@@ -3,7 +3,7 @@ let ctx = c.getContext("2d");
 const scale = 20;
 const piecesArray = [];
 let gameRunning = "false";
-const color = "#" + Math.floor(Math.random()*16777215).toString(16);
+const color = "#" + Math.floor(Math.random() * 16777215).toString(16);
 
 function control(e) {
   switch (e.keyCode) {
@@ -123,54 +123,56 @@ function randomizer() {
   let random = Math.floor(Math.random() * shapes.length);
   let shape = shapes[random];
   return shape;
-};
+}
 
 function startGame() {
   if (gameRunning === "false") {
-  const piece = new Piece(250, 0, randomizer(), color);
-  shape(piece.x, piece.y, piece.shape)
-  piecesArray.push(piece)
-  console.log(piecesArray);
-  gameRunning = "true";
-  runGame()
+    const piece = new Piece(250, 0, randomizer(), color);
+    shape(piece.x, piece.y, piece.shape);
+    piecesArray.push(piece);
+    console.log(piecesArray);
+    gameRunning = "true";
+    runGame();
   }
-};
+}
 
 function runGame() {
-  
   setTimeout(() => {
-  ctx.clearRect(0,0,500,500)
-  piecesArray.forEach(e=> {
-   
+    ctx.clearRect(0, 0, 500, 500);
+    piecesArray.forEach((e) => {
+      //if moving move piece down board
+      if (e.moving === true) {
+        e.y = e.y + scale;
+        //check for Collitions side to side and down
+        //collitions(e)
+      }
 
+      shape(e.x, e.y, e.shape);
+    });
+    if (gameRunning === "true") {
+      runGame();
+    }
+  }, 1000);
+}
 
-    //if moving move piece down board
-   if (e.moving === true) {
-     e.y = e.y+scale
-    //check for Collitions side to side and down 
-    //collitions(e)
-   }
-
-    shape(e.x, e.y, e.shape)
-  })
-  if(gameRunning === "true"){
-    runGame()
-
-  }
-}, 1000);
+// function for if no moving shapes start next shape
+function nextShape(shape) {
+  console.log("nextShape");
 }
 
 function collitions(piece) {
   //collitions side to side
   if (piece.x < 0 || piece.x > 500) {
-    return false; 
+    return false;
   } else {
     return true;
   }
   // check for collitions down and with other objects if detected set movement to false
-
 }
 
 window.addEventListener("keydown", control);
-document.querySelector(".start").addEventListener("click", startGame)
-document.querySelector(".end").addEventListener("click", ()=>{gameRunning = "false"; console.log("ended"); })
+document.querySelector(".start").addEventListener("click", startGame);
+document.querySelector(".end").addEventListener("click", () => {
+  gameRunning = "false";
+  console.log("ended");
+});
