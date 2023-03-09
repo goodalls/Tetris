@@ -6,6 +6,7 @@ let gameRunning = "false";
 const color = "#" + Math.floor(Math.random() * 16777215).toString(16);
 
 function control(e) {
+  const piece = piecesArray.find(e=>e.moving === true)
   switch (e.keyCode) {
     case 37:
       console.log("arrowLeft");
@@ -13,9 +14,17 @@ function control(e) {
       break;
     case 40:
       console.log("arrowDown");
+      //clear canvas where piece is
+      ctx.clearRect(piece.x, piece.y, piece.x*2, piece.y*2);
+      //adjust piece to rotate 
+      //not sure if this will adjust in piecesArray
+      piece.rotated++
+      //redraw piece
+      shape(e.x, e.y, e.shape, e.rotated);
       break;
     case 38:
       console.log("arrowUp");
+      ctx.clearRect(0, 0, 500, 500);
       break;
     case 39:
       console.log("arrowRight");
@@ -34,17 +43,30 @@ function draw(x, y, color) {
   ctx.clearRect(x + scale / 4, y + scale / 4, scale / 2, scale / 2);
 }
 
-function shape(x, y, type) {
-  //i, o, t, j, l, s, z.
+function shape(x, y, type, rotated) {
+  //shapes = (i, o, t, j, l, s, z)
+  //rotated = (0,1,2,3)
   switch (type) {
     case "o":
-      Array(
-        [x, y],
-        [x + scale, y],
-        [x, y + scale],
-        [x + scale, y + scale]
-      ).forEach((e) => draw(e[0], e[1]));
-      break;
+      if (rotated === 0) {
+        Array(
+          [x, y],
+          [x + scale, y],
+          [x, y + scale],
+          [x + scale, y + scale]
+        ).forEach((e) => draw(e[0], e[1]));
+        break;
+      }
+      
+      if (rotated === 1) {
+        Array(
+          [x, y],
+          [x + scale, y],
+          [x, y + scale],
+          [x + scale, y + scale]
+        ).forEach((e) => draw(e[0], e[1]));
+        break;
+      }
 
     case "i":
       Array(
@@ -111,6 +133,7 @@ class Piece {
     this.shape = shape;
     this.color = color;
     this.moving = true;
+    this.rotated = 0;
   }
 
   rotate() {
@@ -140,14 +163,14 @@ function runGame() {
   setTimeout(() => {
     ctx.clearRect(0, 0, 500, 500);
     piecesArray.forEach((e) => {
-      //if moving move piece down board
+      //if moving = 'true' move piece down board
       if (e.moving === true) {
         e.y = e.y + scale;
         //check for Collitions side to side and down
         //collitions(e)
       }
 
-      shape(e.x, e.y, e.shape);
+      shape(e.x, e.y, e.shape, e.rotated);
     });
     if (gameRunning === "true") {
       runGame();
@@ -157,7 +180,9 @@ function runGame() {
 
 // function for if no moving shapes start next shape
 function nextShape(shape) {
-  console.log("nextShape");
+  const newShape = randomizer()
+  console.log("nextShape is");
+  
 }
 
 function collitions(piece) {
