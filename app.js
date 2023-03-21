@@ -6,7 +6,7 @@ let gameRunning = "false";
 const color = "#" + Math.floor(Math.random() * 16777215).toString(16);
 
 function control(e) {
-  const piece = piecesArray.find(e=>e.moving === true)
+  const piece = piecesArray.find((e) => e.moving === true);
   switch (e.keyCode) {
     case 37:
       console.log("arrowLeft");
@@ -15,10 +15,10 @@ function control(e) {
     case 40:
       console.log("arrowDown");
       //clear canvas where piece is
-      ctx.clearRect(piece.x, piece.y, piece.x*2, piece.y*2);
-      //adjust piece to rotate 
+      ctx.clearRect(piece.x, piece.y, piece.x * 2, piece.y * 2);
+      //adjust piece to rotate
       //not sure if this will adjust in piecesArray
-      piece.rotated++
+      piece.rotated++;
       //redraw piece
       shape(e.x, e.y, e.shape, e.rotated);
       break;
@@ -45,27 +45,47 @@ function draw(x, y, color) {
 
 function shape(x, y, type, rotated) {
   //shapes = (i, o, t, j, l, s, z)
-  const shapes = [  
+  const shapes = [
     [
-      [0, 0, 0, 0], 
+      [0, 0, 0, 0],
       [1, 1, 1, 1],
-      [0, 0, 0, 0], 
-      [0, 0, 0, 0]
-    ], 
+      [0, 0, 0, 0],
+      [0, 0, 0, 0],
+    ],
     [
       [2, 0, 0],
       [2, 2, 2],
-      [0, 0, 0]
+      [0, 0, 0],
     ],
     [
-      [3,3,3],
-      [3,3,3],
-      [3,3,3]
+      [3, 3, 3],
+      [3, 3, 3],
+      [3, 3, 3],
     ],
     [
-      [],
-      [],
-      []
+      [0, 4, 0],
+      [4, 4, 4],
+      [0, 0, 0],
+    ],
+    [
+      [0, 0, 0],
+      [5, 5, 5],
+      [0, 5, 0],
+    ],
+    [
+      [6, 6, 0],
+      [0, 6, 6],
+      [0, 0, 0],
+    ],
+    [
+      [0, 0, 0],
+      [0, 7, 7],
+      [7, 7, 0],
+    ],
+    [
+      [0, 0, 0],
+      [8, 8, 8],
+      [0, 0, 8],
     ],
   ];
   //rotated = (0,1,2,3)
@@ -80,7 +100,7 @@ function shape(x, y, type, rotated) {
         ).forEach((e) => draw(e[0], e[1]));
         break;
       }
-      
+
       if (rotated === 1) {
         Array(
           [x, y],
@@ -203,9 +223,8 @@ function runGame() {
 
 // function for if no moving shapes start next shape
 function nextShape(shape) {
-  const newShape = randomizer()
+  const newShape = randomizer();
   console.log("nextShape is");
-  
 }
 
 function collitions(piece) {
