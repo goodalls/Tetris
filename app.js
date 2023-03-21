@@ -45,6 +45,29 @@ function draw(x, y, color) {
 
 function shape(x, y, type, rotated) {
   //shapes = (i, o, t, j, l, s, z)
+  const shapes = [  
+    [
+      [0, 0, 0, 0], 
+      [1, 1, 1, 1],
+      [0, 0, 0, 0], 
+      [0, 0, 0, 0]
+    ], 
+    [
+      [2, 0, 0],
+      [2, 2, 2],
+      [0, 0, 0]
+    ],
+    [
+      [3,3,3],
+      [3,3,3],
+      [3,3,3]
+    ],
+    [
+      [],
+      [],
+      []
+    ],
+  ];
   //rotated = (0,1,2,3)
   switch (type) {
     case "o":
