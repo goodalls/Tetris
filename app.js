@@ -10,26 +10,16 @@ function control(e) {
   switch (e.keyCode) {
     case 37:
       console.log("arrowLeft");
-
       break;
     case 40:
       console.log("arrowDown");
-      //clear canvas where piece is
-      ctx.clearRect(piece.x, piece.y, piece.x * 2, piece.y * 2);
-      //adjust piece to rotate
-      //not sure if this will adjust in piecesArray
-      piece.rotated++;
-      //redraw piece
-      shape(e.x, e.y, e.shape, e.rotated);
       break;
     case 38:
       console.log("arrowUp");
-      ctx.clearRect(0, 0, 500, 500);
       break;
     case 39:
       console.log("arrowRight");
       break;
-
     default:
       console.log("uncaptured keyDown event");
       break;
