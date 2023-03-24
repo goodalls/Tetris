@@ -4,6 +4,8 @@ const scale = 20;
 const piecesArray = [];
 let gameRunning = "false";
 const color = "#" + Math.floor(Math.random() * 16777215).toString(16);
+c.width = scale * 20
+c.height = scale * 30
 
 function control(e) {
   const piece = piecesArray.find((e) => e.moving === true);
@@ -81,25 +83,13 @@ function shape(x, y, type, rotated) {
   //rotated = (0,1,2,3)
   switch (type) {
     case "o":
-      if (rotated === 0) {
-        Array(
-          [x, y],
-          [x + scale, y],
-          [x, y + scale],
-          [x + scale, y + scale]
-        ).forEach((e) => draw(e[0], e[1]));
-        break;
-      }
-
-      if (rotated === 1) {
-        Array(
-          [x, y],
-          [x + scale, y],
-          [x, y + scale],
-          [x + scale, y + scale]
-        ).forEach((e) => draw(e[0], e[1]));
-        break;
-      }
+      Array(
+        [x, y],
+        [x + scale, y],
+        [x, y + scale],
+        [x + scale, y + scale]
+      ).forEach((e) => draw(e[0], e[1]));
+      break;
 
     case "i":
       Array(

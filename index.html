@@ -11,28 +11,33 @@
       href="https://fonts.googleapis.com/css2?family=VT323&display=swap"
       rel="stylesheet"
     />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
+      crossorigin="anonymous"
+    />
     <link rel="stylesheet" href="style.css" />
   </head>
-  <body>
+  <body class="container-fluid">
     <header>
       <h1>TETRIS</h1>
     </header>
-    <main>
-        <canvas height="500" width="500" id="canvas"></canvas>
+    <div class="row">
+      <main class="col-8">
+        <canvas id="canvas"></canvas>
+      </main>
 
-    </main>
-
-    <aside>
-      <p>Next Shape: <span class="nextShape"></span></p>
-      <p>Score: <span id="score">0</span></p>
-      <p>Lines: <span id="lines">0</span></p>
-      <p>Level: <span id="level">0</span></p>
-      <button class="start">Start</button>
-      <button class="end">END</button>
-    </aside>
-    <footer>
-
-    </footer>
+      <aside class="col-4">
+        <p>Next Shape: <span class="nextShape"></span></p>
+        <p>Score: <span id="score">0</span></p>
+        <p>Lines: <span id="lines">0</span></p>
+        <p>Level: <span id="level">0</span></p>
+        <button class="start">Start</button>
+        <button class="end">END</button>
+      </aside>
+    </div><!-- .ROW END-->
+    <footer></footer>
     <script src="app.js"></script>
   </body>
 </html>
